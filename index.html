@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Quiz</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .quiz-container { width: 50%; margin: auto; padding: 20px; }
+        .question { background: #f4f4f4; padding: 15px; border-radius: 5px; margin-bottom: 10px; }
+        pre { background: #ddd; padding: 10px; border-radius: 5px; text-align: left; }
+        button { margin: 5px; padding: 10px; cursor: pointer; }
+        .correct { background-color: green; color: white; }
+        .wrong { background-color: red; color: white; }
+    </style>
+    <script>
+        let totalQuestions = 5;
+        let answeredQuestions = 0;
+        let correctAnswers = 0;
+
+        // Liste der richtigen Antworten
+        let correctAnswersList = [
+            "777",                 // Frage 1
+            "[1, 2, 3, 4]",        // Frage 2
+            "True",                // Frage 3
+            "[1], [1, 2]",         // Frage 4
+            "True"                 // Frage 5
+        ];
+
+        function checkAnswer(questionIndex, event) {
+            let correctAnswer = correctAnswersList[questionIndex];
+            let buttons = event.target.parentElement.getElementsByTagName("button");
+            
+            for (let button of buttons) {
+                button.disabled = true;
+                if (button.innerText === correctAnswer) {
+                    button.classList.add("correct");
+                } else if (button === event.target) {
+                    button.classList.add("wrong");
+                }
+            }
+
+            if (event.target.innerText === correctAnswer) {
+                correctAnswers++;
+            }
+
+            answeredQuestions++;
+            if (answeredQuestions === totalQuestions) {
+                alert("Du hast " + correctAnswers + "/" + totalQuestions + " richtig!");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Python Quiz</h1>
+    <div class="quiz-container">
+        <div class="question">
+            <pre>
+a = "7"
+b = "3"
+c = a * int(b)
+print(c) # ???
+            </pre>
+            <button onclick="checkAnswer(0, event)">21</button>
+            <button onclick="checkAnswer(0, event)">22</button>
+            <button onclick="checkAnswer(0, event)">Error</button>
+            <button onclick="checkAnswer(0, event)">77</button>
+            <button onclick="checkAnswer(0, event)">777</button>
+            <button onclick="checkAnswer(0, event)">undefined</button>
+        </div>
+        
+        <div class="question">
+            <pre>
+list1 = [1, 2, 3]
+list2 = list1
+list2.append(4)
+print(list1) # ???
+            </pre>
+            <button onclick="checkAnswer(1, event)">[1, 2, 3]</button>
+            <button onclick="checkAnswer(1, event)">[1, 2, 3, 4]</button>
+            <button onclick="checkAnswer(1, event)">Error</button>
+            <button onclick="checkAnswer(1, event)">[4, 1, 2, 3]</button>
+            <button onclick="checkAnswer(1, event)">[1, 2]</button>
+            <button onclick="checkAnswer(1, event)">undefined</button>
+        </div>
+
+        <div class="question">
+            <pre>
+x = 5
+print(x == 5.0) # ???
+            </pre>
+            <button onclick="checkAnswer(2, event)">True</button>
+            <button onclick="checkAnswer(2, event)">False</button>
+            <button onclick="checkAnswer(2, event)">Error</button>
+            <button onclick="checkAnswer(2, event)">None</button>
+            <button onclick="checkAnswer(2, event)">5</button>
+            <button onclick="checkAnswer(2, event)">undefined</button>
+        </div>
+
+        <div class="question">
+            <pre>
+def func(a, b=[]):
+    b.append(a)
+    return b
+print(func(1)) # ???
+print(func(2)) # ???
+            </pre>
+            <button onclick="checkAnswer(3, event)">[1], [1, 2]</button>
+            <button onclick="checkAnswer(3, event)">[1], [2]</button>
+            <button onclick="checkAnswer(3, event)">[2], [1]</button>
+            <button onclick="checkAnswer(3, event)">[1], [1]</button>
+            <button onclick="checkAnswer(3, event)">Error</button>
+            <button onclick="checkAnswer(3, event)">undefined</button>
+        </div>
+
+        <div class="question">
+            <pre>
+print(bool("False")) # ???
+            </pre>
+            <button onclick="checkAnswer(4, event)">True</button>
+            <button onclick="checkAnswer(4, event)">False</button>
+            <button onclick="checkAnswer(4, event)">Error</button>
+            <button onclick="checkAnswer(4, event)">None</button>
+            <button onclick="checkAnswer(4, event)">undefined</button>
+            <button onclick="checkAnswer(4, event)">0</button>
+        </div>
+
+    </div>
+</body>
+</html>
